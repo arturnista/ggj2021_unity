@@ -1,2 +1,2 @@
-# Global game jam _2021_
-# Global game jam _2021_
+# Global Game Jam  
+ _2021_
