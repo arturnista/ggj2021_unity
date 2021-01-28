@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _backwardMoveSpeed = default;
     [SerializeField] private float _gravity = default;
     private Vector3 _velocity = default;
+    [Header("Jump")]
+    [SerializeField] private float _jumpHeight = default;
     [Header("Ground Check")]
     [SerializeField] private Transform _groundCheck = default;
     [SerializeField] private float _groundDistance = 0.4f;
@@ -19,8 +21,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _totalStamina = default;
     [SerializeField] private float _staminaRunCost = default;
     [SerializeField] private float _staminaRecoverAmount = default;
-    private float _currentStamina = default;
-    private bool _isGrounded = default;
+    [SerializeField] private float _currentStamina = default;
+    [SerializeField] private float _staminaCooldown = default;
+    [SerializeField] private bool _isGrounded = default;
     private bool _isRunning = false;
     public bool IsRunning => _isRunning;
     private bool _canRun = true;
@@ -51,12 +54,22 @@ public class PlayerMovement : MonoBehaviour
         _characterController.Move(movementNormalized * moveSpeedToUse * Time.deltaTime);
 
         _velocity.y += _gravity * Time.deltaTime;
+        StaminaDrainCalculation();
 
         _characterController.Move(_velocity * Time.deltaTime);
 
-        RunCheck();
-        StaminaDrainCalculation();
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+        {
+            Jump();
+        }
 
+        RunCheck();
+        Debug.Log(_characterController.velocity.magnitude);
+    }
+
+    private void Jump()
+    {
+        _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
     }
 
     private void RunCheck()
@@ -89,13 +102,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void StaminaDrainCalculation()
     {
-        if (_isRunning)
+        if (_isRunning && _characterController.velocity.magnitude > 0f)
         {
             _currentStamina -= _staminaRunCost * Time.deltaTime;
         }
         else
         {
-            if (_currentStamina < _totalStamina)
+            if (_currentStamina < _totalStamina && !Input.GetKey(KeyCode.LeftShift))
             {
                 _currentStamina += _staminaRecoverAmount * Time.deltaTime;
             }
@@ -105,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator RunningCooldown()
     {
         _canRun = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(_staminaCooldown);
         _canRun = true;
     }
 }
