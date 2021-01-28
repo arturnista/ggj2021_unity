@@ -22,9 +22,14 @@ public class EnemyHealth : MonoBehaviour
     public void DealDamage(float damage, float damageForce, Transform damager)
     {
         _currentHealth -= damage;
+        _enemyMovement.ForceTarget();
+        
         if (_currentHealth <= 0f)
         {
             _animator.SetTrigger("Death");
+            Destroy(GetComponent<EnemyAttack>());
+            Destroy(GetComponent<SensorToolkit.RangeSensor>());
+            Destroy(GetComponent<Collider>());
             Destroy(_enemyMovement);
             Destroy(this);
         }

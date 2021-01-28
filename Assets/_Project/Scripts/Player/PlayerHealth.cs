@@ -22,4 +22,9 @@ public class PlayerHealth : MonoBehaviour
         Debug.LogFormat("Health: {0}", _currentHealth);
     }
 
+    public void AddHealth(float health)
+    {
+        _currentHealth = Mathf.Clamp(0f, _maxHealth, _currentHealth + health);
+    }
+
 }

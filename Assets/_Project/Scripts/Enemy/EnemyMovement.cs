@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using SensorToolkit;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -12,22 +13,35 @@ public class EnemyMovement : MonoBehaviour
     private Animator _animator;
     private bool _stopped;
     private EnemyAttack _attack;
+    private RangeSensor _sensor;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _attack = GetComponent<EnemyAttack>();
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _sensor = GetComponentInChildren<RangeSensor>();
+    }
+
+    private void OnEnable()
+    {
+        _sensor.OnDetected.AddListener(HandlePlayerDetect);
     }
 
     private void OnDisable()
     {
+        _sensor.OnDetected.RemoveListener(HandlePlayerDetect);
         _agent.isStopped = true;
+    }
+
+    private void HandlePlayerDetect(GameObject target, Sensor sensor)
+    {
+        _player = target;
     }
 
     private void Update()
     {
+        if (_player == null) return;
         if (_agent.isStopped)
         {
             _attack.CancelAttack();
@@ -42,6 +56,11 @@ public class EnemyMovement : MonoBehaviour
         {
             _attack.StartAttacking(_player);
         }
+    }
+
+    public void ForceTarget()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void Pause()
