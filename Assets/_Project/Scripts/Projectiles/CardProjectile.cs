@@ -6,6 +6,7 @@ public class CardProjectile : MonoBehaviour
 {
     
     [SerializeField] private float _damage = 10f;
+    [SerializeField] private float _damageForce = 2f;
     [Space]
     [SerializeField] private GameObject _impactPrefab = default;
     
@@ -27,7 +28,7 @@ public class CardProjectile : MonoBehaviour
         EnemyHealth health = collision.gameObject.GetComponent<EnemyHealth>();
         if (health)
         {
-            health.DealDamage(_damage, transform);
+            health.DealDamage(_damage, _damageForce, transform);
         }
         
         Instantiate(_impactPrefab, transform.position, Quaternion.identity);

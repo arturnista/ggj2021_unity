@@ -6,6 +6,7 @@ public class MeleeWeapon : BaseWeapon
 {
 
     [SerializeField] private float _damage = 15f;
+    [SerializeField] private float _damageForce = 15f;
     [SerializeField] private float _attackDelay = 1f;
     [SerializeField] private SphereCollider _collider = default;
     [SerializeField] private GameObject _impactPrefab = default;
@@ -69,7 +70,7 @@ public class MeleeWeapon : BaseWeapon
                 Instantiate(_impactPrefab, hit.point, Quaternion.identity);
             }
 
-            health.DealDamage(_damage, transform);
+            health.DealDamage(_damage, _damageForce, transform);
         }
     }
 }
