@@ -64,12 +64,13 @@ public class MeleeWeapon : BaseWeapon
         EnemyHealth health = collider.gameObject.GetComponent<EnemyHealth>();
         if (health)
         {
-            RaycastHit hit;
-            if (Physics.Linecast(transform.position, collider.transform.position, out hit))
-            {
-                Instantiate(_impactPrefab, hit.point, Quaternion.identity);
-            }
+            // RaycastHit hit;
+            // if (Physics.Raycast(transform.position, transform.forward, out hit))
+            // {
+            //     Instantiate(_impactPrefab, hit.point, Quaternion.identity);
+            // }
 
+            Instantiate(_impactPrefab, transform.position + transform.forward, Quaternion.identity);
             health.DealDamage(_damage, _damageForce, transform);
         }
     }

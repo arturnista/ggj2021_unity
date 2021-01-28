@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 6377440889923305784}
   - component: {fileID: 6377440889923305790}
   - component: {fileID: 6377440889923305789}
+  - component: {fileID: 8718763158508475802}
   m_Layer: 0
   m_Name: CardProjectile
   m_TagString: Untagged
@@ -296,4 +297,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 10
+  _damageForce: 2
   _impactPrefab: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
+--- !u!114 &8718763158508475802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6377440889923305788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90127251e198e714e8dbd331486fd0fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Time: 5

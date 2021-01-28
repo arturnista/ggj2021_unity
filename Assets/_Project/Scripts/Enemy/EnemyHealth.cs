@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
     private EnemyMovement _enemyMovement;
 
     private Animator _animator;
+    private bool _isKnockedOut;
 
     private void Awake()
     {
@@ -29,22 +30,34 @@ public class EnemyHealth : MonoBehaviour
         }
         else
         {
-            StartCoroutine(TakeDamageCoroutine(damageForce));
+            if (!_isKnockedOut)
+            {
+                StopAllCoroutines();
+                StartCoroutine(TakeDamageCoroutine(damageForce));
+            }
         }
     }
 
     private IEnumerator TakeDamageCoroutine(float damageForce)
     {
+        
         _enemyMovement.Pause();
         if (damageForce < 15f) {
+
             float lerpValue = Mathf.InverseLerp(0f, 15f, damageForce);
             float time = Mathf.Lerp(0f, 1.5f, lerpValue);
             yield return new WaitForSeconds(time);
+
         } else {
+
+            _isKnockedOut = true;
             _animator.SetTrigger("Knockout");
             yield return new WaitForSeconds(4f);
+            _isKnockedOut = false;
+
         }
         _enemyMovement.Resume();
+        
     }
 
 }
