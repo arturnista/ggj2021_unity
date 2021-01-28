@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         RunCheck();
-        Debug.Log(_characterController.velocity.magnitude);
+        // Debug.Log(_characterController.velocity.magnitude);
     }
 
     private void Jump()

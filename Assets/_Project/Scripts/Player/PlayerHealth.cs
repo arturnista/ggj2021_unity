@@ -15,5 +15,11 @@ public class PlayerHealth : MonoBehaviour
         _currentHealth = _maxHealth;
         _animator = GetComponent<Animator>();
     }
-    
+
+    public void DealDamage(float damage)
+    {
+        _currentHealth -= damage;
+        Debug.LogFormat("Health: {0}", _currentHealth);
+    }
+
 }
