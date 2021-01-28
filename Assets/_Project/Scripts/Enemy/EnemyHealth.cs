@@ -23,7 +23,9 @@ public class EnemyHealth : MonoBehaviour
         _currentHealth -= damage;
         if (_currentHealth <= 0f)
         {
-            Destroy(gameObject);
+            _animator.SetTrigger("Death");
+            Destroy(_enemyMovement);
+            Destroy(this);
         }
         else
         {
@@ -40,7 +42,7 @@ public class EnemyHealth : MonoBehaviour
             yield return new WaitForSeconds(time);
         } else {
             _animator.SetTrigger("Knockout");
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(4f);
         }
         _enemyMovement.Resume();
     }

@@ -18,6 +18,11 @@ public class EnemyMovement : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    private void OnDisable()
+    {
+        _agent.isStopped = true;
+    }
+
     private void Update()
     {
         _agent.destination = _player.transform.position;

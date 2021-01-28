@@ -440,6 +440,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeckCard
       objectReference: {fileID: 0}
+    - target: {fileID: 1065837077754922423, guid: c30136f839145954f9be6dc33f628590, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c30136f839145954f9be6dc33f628590, type: 3}
 --- !u!4 &2375339173537382329 stripped
@@ -460,7 +464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7753665810661482328, guid: 4345b3a4b97322240baa032abbb2fed5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7753665810661482343, guid: 4345b3a4b97322240baa032abbb2fed5, type: 3}
       propertyPath: m_RootOrder
