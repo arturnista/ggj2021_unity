@@ -6,8 +6,11 @@ public class PlayerAttack : MonoBehaviour
 {
 
     private BaseWeapon _weapon;
+    public BaseWeapon Weapon => _weapon;
     private BaseWeapon _previousWeapon;
+
     [SerializeField] private BaseWeapon[] _weaponList = default;
+    public BaseWeapon[] WeaponList => _weaponList;
 
     private void Awake()
     {

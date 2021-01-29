@@ -30,8 +30,8 @@ public class UIPlayerHealthbar : MonoBehaviour
     private void UpdateHealth()
     {
         _lastHealth = _playerHealth.CurrentHealth;
-        _valueImage.fillAmount = Mathf.Clamp01(_playerHealth.CurrentHealth / _playerHealth.MaxHealth);
-        _valueText.text = string.Format("+ {0}", _playerHealth.CurrentHealth);
+        if (_valueImage) _valueImage.fillAmount = Mathf.Clamp01(_playerHealth.CurrentHealth / _playerHealth.MaxHealth);
+        if (_valueText) _valueText.text = _playerHealth.CurrentHealth.ToString();
     }
 
 }
