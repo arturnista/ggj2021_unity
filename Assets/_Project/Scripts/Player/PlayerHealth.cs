@@ -7,10 +7,12 @@ public class PlayerHealth : MonoBehaviour
 {
 
     [SerializeField] private float _maxHealth = 100f;
+    public float MaxHealth => _maxHealth;
     [Header("Feedback")]
     [SerializeField] private Image _feedbackImage = default;
 
     private float _currentHealth = 100f;
+    public float CurrentHealth => _currentHealth;
 
     private Animator _animator;
 
@@ -30,7 +32,7 @@ public class PlayerHealth : MonoBehaviour
     public void AddHealth(float health)
     {
         StartCoroutine(feedback(Color.blue));
-        _currentHealth = Mathf.Clamp(0f, _maxHealth, _currentHealth + health);
+        _currentHealth = Mathf.Clamp(_currentHealth + health, 0f, _maxHealth);
     }
 
     public IEnumerator feedback(Color color)
