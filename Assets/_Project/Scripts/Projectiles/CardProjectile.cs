@@ -6,7 +6,7 @@ public class CardProjectile : MonoBehaviour
 {
     
     [SerializeField] private float _damage = 10f;
-    [SerializeField] private float _damageForce = 2f;
+    [SerializeField] private int _damageForce = 2;
     [Space]
     [SerializeField] private GameObject _impactPrefab = default;
     

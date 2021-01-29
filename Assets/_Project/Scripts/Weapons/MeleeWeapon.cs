@@ -6,7 +6,7 @@ public class MeleeWeapon : BaseWeapon
 {
 
     [SerializeField] private float _damage = 15f;
-    [SerializeField] private float _damageForce = 15f;
+    [SerializeField] private int _damageForce = 10;
     [SerializeField] private float _attackDelay = 1f;
     [SerializeField] private SphereCollider _collider = default;
     [SerializeField] private GameObject _impactPrefab = default;

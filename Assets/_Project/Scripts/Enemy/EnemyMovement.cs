@@ -7,20 +7,28 @@ using SensorToolkit;
 public class EnemyMovement : MonoBehaviour
 {
 
+    [SerializeField] private AudioClip _screamClip = default;
+
     private GameObject _player;
     private NavMeshAgent _agent;
 
+    private EnemyState _state;
+    private EnemyAttack _attack;
     private Animator _animator;
     private bool _stopped;
-    private EnemyAttack _attack;
     private RangeSensor _sensor;
+
+    private AudioSource _source;
 
     private void Awake()
     {
+        _state = GetComponent<EnemyState>();
+        _attack = GetComponent<EnemyAttack>();
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
-        _attack = GetComponent<EnemyAttack>();
         _sensor = GetComponentInChildren<RangeSensor>();
+
+        _source = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -36,19 +44,13 @@ public class EnemyMovement : MonoBehaviour
 
     private void HandlePlayerDetect(GameObject target, Sensor sensor)
     {
-        _player = target;
+        SetTarget(target);
     }
 
     private void Update()
     {
         if (_player == null) return;
-        if (_agent.isStopped)
-        {
-            _attack.CancelAttack();
-            return;
-        }
-
-        if (!_attack.CanMove) return;
+        if (_state.CurrentState != EnemyState.State.Moving) return;
         
         _agent.destination = _player.transform.position;
         _animator.SetFloat("Speed", _agent.velocity.magnitude);
@@ -60,7 +62,25 @@ public class EnemyMovement : MonoBehaviour
 
     public void ForceTarget()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        SetTarget(GameObject.FindGameObjectWithTag("Player"));
+    }
+
+    private void SetTarget(GameObject target)
+    {
+        if (_player != null) return;
+        _player = target;
+
+        if (Random.value > .3f) StartCoroutine(ScreamCoroutine());
+        else _state.ChangeState(EnemyState.State.Moving); 
+    }
+
+    private IEnumerator ScreamCoroutine()
+    {
+        _source.PlayOneShot(_screamClip);
+        _animator.SetTrigger("Scream");
+        _state.ChangeState(EnemyState.State.Scream);
+        yield return new WaitForSeconds(2f);
+        _state.ChangeState(EnemyState.State.Moving);
     }
 
     public void Pause()

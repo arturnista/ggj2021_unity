@@ -5,56 +5,53 @@ using UnityEngine.AI;
 
 public class EnemyAttack : MonoBehaviour
 {
-
-    private enum State
-    {
-        NotAttacking,
-        Attacking,
-        StopAttacking
-    }
     
     [SerializeField] private float _damage = 5f;
     
+    private EnemyState _state;
     private Animator _animator;
     private NavMeshAgent _agent;
-    private State _state;
 
     private GameObject _target;
-
-    public bool CanMove => _state == State.NotAttacking;
     
     private void Awake()
     {
+        _state = GetComponent<EnemyState>();
         _animator = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
-        _state = State.NotAttacking;
+
+        _state.OnChangeState += HandleChangeState;
     }
 
     private void Update()
     {
-        if (_state != State.Attacking) return;
+        if (_state.CurrentState != EnemyState.State.Attacking) return;
         if (Vector3.Distance(_target.transform.position, transform.position) > _agent.stoppingDistance)
         {
             StopAttacking();
         }
     }
 
+    private void HandleChangeState(EnemyState.State newState, EnemyState.State lastState)
+    {
+        if (lastState == EnemyState.State.Attacking)
+        {
+            _animator.SetBool("IsAttacking", false);
+        }
+    }
+
     public void StartAttacking(GameObject target)
     {
         _animator.SetBool("IsAttacking", true);
-        _state = State.Attacking;
+        _state.ChangeState(EnemyState.State.Attacking);
         _target = target;
     }
 
     private void StopAttacking()
     {
         _animator.SetBool("IsAttacking", false);
-        _state = State.StopAttacking;
-    }
-
-    public void CancelAttack()
-    {
-        _state = State.NotAttacking;
+        _state.ChangeState(EnemyState.State.StopAttacking);
+        StartCoroutine(FailsafeCoroutine());
     }
     
     private void _AttackContact()
@@ -71,10 +68,17 @@ public class EnemyAttack : MonoBehaviour
     
     private void _EndAttack()
     {
-        if (_state == State.StopAttacking)
+        if (_state.CurrentState == EnemyState.State.StopAttacking)
         {
-            _state = State.NotAttacking;
+            StopAllCoroutines();
+            _state.ChangeState(EnemyState.State.Moving);
         }
+    }
+
+    private IEnumerator FailsafeCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        _state.ChangeState(EnemyState.State.Moving);
     }
 
 }
