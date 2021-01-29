@@ -207,6 +207,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f91c399cd0633ef4bba4e535d8761dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponList:
+  - {fileID: 6172818953662839284}
+  - {fileID: 2375339173537382328}
 --- !u!114 &6587604577487486953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 6587604577487486952}
   _forwardWalkSpeed: 9
-  _forwardRunSpeed: 18
+  _forwardRunSpeed: 14
   _backwardMoveSpeed: 4.5
   _gravity: -9.81
   _jumpHeight: 1
@@ -249,6 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _feedbackImage: {fileID: 0}
 --- !u!143 &6587604577487486952
 CharacterController:
   m_ObjectHideFlags: 0
@@ -465,6 +469,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1065837077754922420, guid: c30136f839145954f9be6dc33f628590, type: 3}
   m_PrefabInstance: {fileID: 3331673375457557005}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2375339173537382328 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1065837077754922421, guid: c30136f839145954f9be6dc33f628590, type: 3}
+  m_PrefabInstance: {fileID: 3331673375457557005}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256db8e48284bde4db149ec5d5cc34eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3611811142209539193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -531,3 +546,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7753665810661482343, guid: 4345b3a4b97322240baa032abbb2fed5, type: 3}
   m_PrefabInstance: {fileID: 3611811142209539193}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6172818953662839284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7473153187901191565, guid: 4345b3a4b97322240baa032abbb2fed5, type: 3}
+  m_PrefabInstance: {fileID: 3611811142209539193}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ed3319415e40c48918370c299695b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
