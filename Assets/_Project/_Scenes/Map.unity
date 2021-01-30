@@ -274,42 +274,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1327223157, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 415.7878
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327223157, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 752.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327223157, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 384.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327223158, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327223158, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327223158, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050655015841701851, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 155.9191
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050655015841701851, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 698
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050655015841701851, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 439
-      objectReference: {fileID: 0}
     - target: {fileID: 4200538993712407514, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
       propertyPath: m_Name
       value: EventSystem
@@ -357,14 +321,6 @@ PrefabInstance:
     - target: {fileID: 4200538993712407519, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8651509564847153666, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8907816325541688675, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
@@ -442,7 +398,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.6797653e+32, y: 4.742582e+30, z: 1.6494419e+28, w: 3991.2756}
+  m_BoundingSphereOverride: {x: NaN, y: 0, z: Infinity, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
