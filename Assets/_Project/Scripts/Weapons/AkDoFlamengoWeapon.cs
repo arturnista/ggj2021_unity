@@ -75,7 +75,7 @@ public class AkDoFlamengoWeapon : BaseWeapon
             EnemyHealth health = hit.collider.gameObject.GetComponent<EnemyHealth>();
             if (health)
             {
-                health.DealDamage(_damage, 0, _head);
+                health.DealDamage(_damage, 6, _head);
                 Instantiate(_enemyHitEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal, Vector3.up));
             }
             else 
