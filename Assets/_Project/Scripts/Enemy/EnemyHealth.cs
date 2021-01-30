@@ -36,7 +36,7 @@ public class EnemyHealth : MonoBehaviour
         if (_currentHealth <= 0f)
         {
             _state.ChangeState(EnemyState.State.Dying);
-            _audioSource.PlayOneShot(_deathSfx);
+            _audioSource.PlayOneShot(_deathSfx, 0.5f);
             _animator.SetTrigger("Death");
             gameObject.tag = "Untagged";
             Destroy(GetComponent<EnemyAttack>());
@@ -98,7 +98,7 @@ public class EnemyHealth : MonoBehaviour
 
     private IEnumerator DamageSfxCoroutine()
     {
-        _audioSource.PlayOneShot(_damageSfx, 0.5f);
+        _audioSource.PlayOneShot(_damageSfx, 0.3f);
         _hasPlayedDamageSfx = true;
         yield return new WaitForSeconds(0.5f);
         _hasPlayedDamageSfx = false;

@@ -193,6 +193,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9139877679412501525, guid: 3c3fd2819b59daa4e9ba1b5e1a7b4739, type: 3}
+      propertyPath: _damage
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9139877679412501525, guid: 3c3fd2819b59daa4e9ba1b5e1a7b4739, type: 3}
+      propertyPath: _attackSfx
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9139877679412501525, guid: 3c3fd2819b59daa4e9ba1b5e1a7b4739, type: 3}
+      propertyPath: _attackDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9139877679412501525, guid: 3c3fd2819b59daa4e9ba1b5e1a7b4739, type: 3}
+      propertyPath: _hitMask.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9139877679412501525, guid: 3c3fd2819b59daa4e9ba1b5e1a7b4739, type: 3}
+      propertyPath: _wallHitEffectPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9139877679412501525, guid: 3c3fd2819b59daa4e9ba1b5e1a7b4739, type: 3}
+      propertyPath: _enemyHitEffectPrefab
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c3fd2819b59daa4e9ba1b5e1a7b4739, type: 3}
 --- !u!1 &653260035
