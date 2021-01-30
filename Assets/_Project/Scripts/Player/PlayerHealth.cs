@@ -10,14 +10,21 @@ public class PlayerHealth : MonoBehaviour
     public float MaxHealth => _maxHealth;
     [Header("Feedback")]
     [SerializeField] private Image _feedbackImage = default;
+    [Header("SFX")]
+    [SerializeField] private AudioClip _damageSfx = default;
+    [SerializeField] private AudioClip _deathSfx = default;
+    [SerializeField] private AudioClip[] _pickUpSfx = default;
 
     private float _currentHealth = 100f;
     public float CurrentHealth => _currentHealth;
 
     private Animator _animator;
+    private bool _hasPlayedDamageSfx = false;
+    private AudioSource _audioSource;
 
     private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         _currentHealth = _maxHealth;
         _animator = GetComponent<Animator>();
     }
@@ -26,6 +33,10 @@ public class PlayerHealth : MonoBehaviour
     {
         StartCoroutine(feedback(Color.red));
         _currentHealth -= damage;
+        if (!_hasPlayedDamageSfx)
+        {
+            StartCoroutine(PlayDamageSfx());
+        }
         Debug.LogFormat("Health: {0}", _currentHealth);
     }
 
@@ -43,6 +54,19 @@ public class PlayerHealth : MonoBehaviour
         _feedbackImage.CrossFadeAlpha(0.01f, 0.7f, false);
         yield return new WaitForSeconds(1.3f);
         _feedbackImage.gameObject.SetActive(false);
+    }
+
+    private IEnumerator PlayDamageSfx()
+    {
+        _audioSource.PlayOneShot(_damageSfx);
+        _hasPlayedDamageSfx = true;
+        yield return new WaitForSeconds(0.5f);
+        _hasPlayedDamageSfx = false;
+    }
+
+    AudioClip GetRandomPickUpSfx()
+    {
+        return _pickUpSfx[Random.Range(0, _pickUpSfx.Length)];
     }
 
 }

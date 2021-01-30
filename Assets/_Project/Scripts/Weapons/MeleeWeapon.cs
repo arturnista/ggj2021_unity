@@ -16,6 +16,9 @@ public class MeleeWeapon : BaseWeapon
     [SerializeField] private ParticleSystem _chargeEffect = default;
     [SerializeField] private ParticleSystem _halfChargeEffect = default;
     [SerializeField] private ParticleSystem _fullChargeEffect = default;
+    [Header("SFX")]
+    [SerializeField] private AudioClip[] _meleeAttackSfx = default;
+    [SerializeField] private AudioClip _bulkDestroySfx = default;
 
     private Transform _parent;
     private Animator _animator;
@@ -26,9 +29,15 @@ public class MeleeWeapon : BaseWeapon
     private bool _halfEffect;
     private bool _fullEffect;
 
+    private AudioSource _audioSource;
+    private bool _hasPlayedSfx = false;
+    private int _attackCounter;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+
+        _audioSource = GetComponent<AudioSource>();
 
         _parent = transform.parent;
         _collider.enabled = false;
@@ -85,7 +94,23 @@ public class MeleeWeapon : BaseWeapon
     private IEnumerator AttackCoroutine()
     {
         _collider.enabled = true;
+        if (!_hasPlayedSfx)
+        {
+            Debug.Log("entrou");
+            _audioSource.PlayOneShot(GetRandomAttackClip(), 0.5f);
+            _hasPlayedSfx = true;
+        }
+        _attackCounter++;
+
         yield return new WaitForSeconds(.2f);
+
+        if (_attackCounter >= 4)
+        {
+            _audioSource.PlayOneShot(_bulkDestroySfx);
+            _attackCounter = 0;
+        }
+
+        _hasPlayedSfx = false;
         _collider.enabled = false;
     }
 
@@ -107,5 +132,10 @@ public class MeleeWeapon : BaseWeapon
             Instantiate(_impactPrefab, transform.position + transform.forward, Quaternion.identity);
             health.DealDamage(damage, force, transform);
         }
+    }
+
+    AudioClip GetRandomAttackClip()
+    {
+        return _meleeAttackSfx[Random.Range(0, _meleeAttackSfx.Length)];
     }
 }

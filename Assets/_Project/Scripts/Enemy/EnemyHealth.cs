@@ -6,6 +6,8 @@ public class EnemyHealth : MonoBehaviour
 {
 
     [SerializeField] private float _maxHealth = 100f;
+    [SerializeField] private AudioClip _damageSfx = default;
+    [SerializeField] private AudioClip _deathSfx = default;
     private float _currentHealth = 100f;
     
     private EnemyState _state;
@@ -14,12 +16,16 @@ public class EnemyHealth : MonoBehaviour
     private Animator _animator;
     private bool _isKnockedOut;
 
+    private AudioSource _audioSource;
+    private bool _hasPlayedDamageSfx = false;
+
     private void Awake()
     {
         _currentHealth = _maxHealth;
         _animator = GetComponent<Animator>();
         _state = GetComponent<EnemyState>();
         _enemyMovement = GetComponent<EnemyMovement>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public void DealDamage(float damage, int damageForce, Transform damager)
@@ -30,6 +36,7 @@ public class EnemyHealth : MonoBehaviour
         if (_currentHealth <= 0f)
         {
             _state.ChangeState(EnemyState.State.Dying);
+            _audioSource.PlayOneShot(_deathSfx);
             _animator.SetTrigger("Death");
             gameObject.tag = "Untagged";
             Destroy(GetComponent<EnemyAttack>());
@@ -54,6 +61,11 @@ public class EnemyHealth : MonoBehaviour
         int force = Mathf.Clamp(damageForce, 0, 11);
 
         _enemyMovement.Pause();
+        
+        if (!_hasPlayedDamageSfx)
+        {
+            StartCoroutine(DamageSfxCoroutine());
+        }
         
         if (force == 11)
         {
@@ -82,6 +94,14 @@ public class EnemyHealth : MonoBehaviour
         _animator.SetTrigger("Knockout");
         yield return new WaitForSeconds(4f);
         _state.ChangeState(EnemyState.State.Moving);
+    }
+
+    private IEnumerator DamageSfxCoroutine()
+    {
+        _audioSource.PlayOneShot(_damageSfx, 0.7f);
+        _hasPlayedDamageSfx = true;
+        yield return new WaitForSeconds(0.5f);
+        _hasPlayedDamageSfx = false;
     }
 
 }

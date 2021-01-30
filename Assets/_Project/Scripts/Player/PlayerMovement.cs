@@ -24,6 +24,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _currentStamina = default;
     [SerializeField] private float _staminaCooldown = default;
     [SerializeField] private bool _isGrounded = default;
+    [Header("SFX")]
+    [SerializeField] private AudioClip[] _footstepsSfx = default;
+    AudioSource _audioSource = default;
+    private Vector3 lastPosition;
+    private float totalMoved;
     private bool _isRunning = false;
     public bool IsRunning => _isRunning;
     private bool _canRun = true;
@@ -31,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _currentStamina = _totalStamina;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -64,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         RunCheck();
+        FootstepsSoundEffects();
         // Debug.Log(_characterController.velocity.magnitude);
     }
 
@@ -120,5 +127,32 @@ public class PlayerMovement : MonoBehaviour
         _canRun = false;
         yield return new WaitForSeconds(_staminaCooldown);
         _canRun = true;
+    }
+
+    private void FootstepsSoundEffects()
+    {
+        if (_characterController.velocity.magnitude > 0 && _characterController.isGrounded && !_audioSource.isPlaying)
+        {
+            float moveFromLastPosition = (lastPosition - _characterController.transform.position).magnitude;
+            lastPosition = _characterController.transform.position;
+            totalMoved += moveFromLastPosition;
+
+            if (totalMoved >= 2.5f && !_isRunning)
+            {
+                _audioSource.PlayOneShot(GetRandomFootstepClip());
+                totalMoved = 0f;
+            }
+            else 
+            if (totalMoved >=3f && _isRunning)
+            {
+                _audioSource.PlayOneShot(GetRandomFootstepClip());
+                totalMoved = 0f;
+            }
+        }
+    }
+
+    AudioClip GetRandomFootstepClip()
+    {
+        return _footstepsSfx[Random.Range(0, _footstepsSfx.Length)];
     }
 }
