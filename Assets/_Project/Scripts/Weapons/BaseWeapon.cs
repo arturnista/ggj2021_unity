@@ -7,5 +7,6 @@ public abstract class BaseWeapon : MonoBehaviour
     
     public abstract void StartAttack();
     public abstract void StopAttack();
+    public abstract void Disable();
 
 }

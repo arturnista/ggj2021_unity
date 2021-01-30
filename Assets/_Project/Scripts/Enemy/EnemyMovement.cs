@@ -20,6 +20,8 @@ public class EnemyMovement : MonoBehaviour
 
     private AudioSource _source;
     private Coroutine _idleCoroutine;
+    private Vector3 _originalPosition;
+    private float _originalSpeed;
 
     private void Awake()
     {
@@ -36,7 +38,10 @@ public class EnemyMovement : MonoBehaviour
     {
         if (_state.CurrentState == EnemyState.State.Idle)
         {
+            _originalPosition = transform.position;
+            _originalSpeed = _agent.speed;
             _idleCoroutine = StartCoroutine(IdleMoveCoroutine());
+            _agent.speed = 1f;
         }
     }
 
@@ -45,8 +50,8 @@ public class EnemyMovement : MonoBehaviour
         while (true)
         {
             
-            Vector2 randomness = Random.insideUnitCircle * 25f;
-            _agent.destination = transform.position + new Vector3(randomness.x, 0f, randomness.y);
+            Vector2 randomness = Random.insideUnitCircle * 15f;
+            _agent.destination = _originalPosition + new Vector3(randomness.x, 0f, randomness.y);
 
             yield return new WaitForSeconds(Random.Range(5f, 10f));
 
@@ -72,6 +77,7 @@ public class EnemyMovement : MonoBehaviour
         {
             if (_idleCoroutine != null) StopCoroutine(_idleCoroutine);
             _agent.destination = transform.position;
+            if (_originalSpeed > 0) _agent.speed = _originalSpeed;
         }
     }
 

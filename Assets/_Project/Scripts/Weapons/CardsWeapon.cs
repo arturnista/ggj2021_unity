@@ -28,6 +28,11 @@ public class CardsWeapon : BaseWeapon
     {
         _isAttacking = false;
     }
+
+    public override void Disable()
+    {
+        StopAttack();
+    }
     
     private void Update()
     {

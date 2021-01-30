@@ -26,6 +26,7 @@ namespace OChanzSohJogaGuensinAqueleGachaDeArrombado
         {
             _player = GameObject.FindGameObjectWithTag("Player");
             StartCoroutine(CreateEnemiesCoroutine());
+            StartCoroutine(CreateHordesCoroutine());
         }
 
         private IEnumerator CreateEnemiesCoroutine()
@@ -36,15 +37,22 @@ namespace OChanzSohJogaGuensinAqueleGachaDeArrombado
             {
                 yield return new WaitForSeconds(30f);
                 GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                 if (enemies.Length == 0)
+                if (enemies.Length < 5)
                 {
-                    CreateEnemies(3, true);
-                }
-                else if (enemies.Length < 5)
-                {
-                    CreateEnemies(5);
+                    CreateEnemies(2);
                 }
             }
+        }
+
+        private IEnumerator CreateHordesCoroutine()
+        {
+            yield return new WaitForSeconds(Random.Range(45f, 75f));
+            CreateHorde();
+        }
+
+        public void CreateHorde()
+        {            
+            CreateEnemies(10, true);
         }
 
         private void CreateEnemies(int amount, bool force = false)
@@ -57,6 +65,7 @@ namespace OChanzSohJogaGuensinAqueleGachaDeArrombado
                 Vector2 randomness = Random.insideUnitCircle;
 
                 EnemyMovement movement = Instantiate(_enemyPrefab, spawn + new Vector3(randomness.x, 0f, randomness.y), Quaternion.identity).GetComponent<EnemyMovement>();
+                movement.GetComponent<UnityEngine.AI.NavMeshAgent>().speed = Random.Range(5f, 10f);
                 if (force) movement.ForceTarget();
             }
         }

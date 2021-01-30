@@ -77,7 +77,7 @@ public class EnemyAttack : MonoBehaviour
 
     private IEnumerator FailsafeCoroutine()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(10f);
         _state.ChangeState(EnemyState.State.Moving);
     }
 

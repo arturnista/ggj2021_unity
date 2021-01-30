@@ -23,8 +23,8 @@ public class MeleeWeapon : BaseWeapon
     private bool _isAttacking;
     private float _attackTime;
 
-    private bool _half;
-    private bool _full;
+    private bool _halfEffect;
+    private bool _fullEffect;
 
     private void Awake()
     {
@@ -40,8 +40,8 @@ public class MeleeWeapon : BaseWeapon
         _isAttacking = true;
         _attackTime = 0f;
         _chargeEffect.Play();
-        _half = false;
-        _full = false;
+        _halfEffect = false;
+        _fullEffect = false;
     }
 
     public override void StopAttack()
@@ -52,20 +52,26 @@ public class MeleeWeapon : BaseWeapon
         _chargeEffect.Clear();
         Attack();
     }
+
+    public override void Disable()
+    {
+        _collider.enabled = false;
+        StopAllCoroutines();
+    }
     
     private void Update()
     {
         if (_isAttacking)
         {
             _attackTime += Time.deltaTime;
-            if (!_half && _attackTime >= _maxAttackTime / 2f)
+            if (!_halfEffect && _attackTime >= _maxAttackTime / 2f)
             {
-                _half = true;
+                _halfEffect = true;
                 _halfChargeEffect.Play();
             }
-            if (!_full && _attackTime >= _maxAttackTime)
+            if (!_fullEffect && _attackTime >= _maxAttackTime)
             {
-                _full = true;
+                _fullEffect = true;
                 _fullChargeEffect.Play();
             }
         }

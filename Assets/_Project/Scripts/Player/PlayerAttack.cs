@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void ChangeWeapon(BaseWeapon nextWeapon)
     {
-        if (_previousWeapon) _previousWeapon.StopAttack();
+        if (_previousWeapon) _previousWeapon.Disable();
         _previousWeapon = _weapon;
         _weapon.gameObject.SetActive(false);
         _weapon = nextWeapon;
