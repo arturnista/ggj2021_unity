@@ -12,6 +12,8 @@ public class AkDoFlamengoWeapon : BaseWeapon
     [SerializeField] private ParticleSystem _fireSystem = default;
     [SerializeField] private GameObject _wallHitEffectPrefab = default;
     [SerializeField] private GameObject _enemyHitEffectPrefab = default;
+    [Header("SFX")]
+    [SerializeField] private AudioClip _attackSfx = default;
 
     private Transform _head;
 
@@ -21,6 +23,7 @@ public class AkDoFlamengoWeapon : BaseWeapon
     private float _attackTime;
 
     private float _musicTime;
+    private bool _hasPlayedSfx;
 
     private void Awake()
     {
@@ -68,6 +71,7 @@ public class AkDoFlamengoWeapon : BaseWeapon
     private void Attack()
     {
         _fireSystem.Play();
+        StartCoroutine(AkAttackSfx());
         RaycastHit hit;
         Debug.DrawRay(_head.position, _head.forward * 100f, Color.red, 10f);
         if (Physics.Raycast(_head.position, _head.forward, out hit, Mathf.Infinity, _hitMask))
@@ -85,5 +89,13 @@ public class AkDoFlamengoWeapon : BaseWeapon
 
         }
         // Debug.Break();
+    }
+
+    public IEnumerator AkAttackSfx()
+    {
+        _audioSource.PlayOneShot(_attackSfx);
+        _hasPlayedSfx = true;
+        yield return new WaitForSeconds(0.3f);
+        _hasPlayedSfx = false;
     }
 }

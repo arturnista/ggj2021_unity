@@ -12,8 +12,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private BaseWeapon[] _weaponList = default;
     public BaseWeapon[] WeaponList => _weaponList;
 
+    [SerializeField] private AudioClip _changeAkSfx = default;
+    private AudioSource _auidoSource;
+
     private void Awake()
     {
+        _auidoSource = GetComponent<AudioSource>();
         _weapon = GetComponentInChildren<BaseWeapon>();
     }
 
@@ -43,15 +47,21 @@ public class PlayerAttack : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && _weapon != _weaponList[2])
         {
+            _auidoSource.PlayOneShot(_changeAkSfx);
             ChangeWeapon(_weaponList[2]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) && _weapon != _weaponList[3])
         {
+            
             ChangeWeapon(_weaponList[3]);
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && _weapon != _previousWeapon && _previousWeapon != null)
         {
+            if (_previousWeapon = _weaponList[2])
+            {
+                _auidoSource.PlayOneShot(_changeAkSfx);
+            }
             ChangeWeapon(_previousWeapon);
         }
     }

@@ -98,7 +98,7 @@ public class EnemyHealth : MonoBehaviour
 
     private IEnumerator DamageSfxCoroutine()
     {
-        _audioSource.PlayOneShot(_damageSfx, 0.7f);
+        _audioSource.PlayOneShot(_damageSfx, 0.5f);
         _hasPlayedDamageSfx = true;
         yield return new WaitForSeconds(0.5f);
         _hasPlayedDamageSfx = false;

@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void DealDamage(float damage)
     {
-        StartCoroutine(feedback(Color.red));
+        StartCoroutine(Feedback(Color.red));
         _currentHealth -= damage;
         if (!_hasPlayedDamageSfx && _currentHealth > 0)
         {
@@ -39,18 +39,18 @@ public class PlayerHealth : MonoBehaviour
         }
         if (_currentHealth <= 0)
         {
-
+            StartCoroutine(Feedback(Color.black));
         }
         Debug.LogFormat("Health: {0}", _currentHealth);
     }
 
     public void AddHealth(float health)
     {
-        StartCoroutine(feedback(Color.blue));
+        StartCoroutine(Feedback(Color.blue));
         _currentHealth = Mathf.Clamp(_currentHealth + health, 0f, _maxHealth);
     }
 
-    public IEnumerator feedback(Color color)
+    public IEnumerator Feedback(Color color)
     {
         color.a = 0.5f;
         _feedbackImage.color = color;
@@ -58,6 +58,12 @@ public class PlayerHealth : MonoBehaviour
         _feedbackImage.CrossFadeAlpha(0.01f, 0.7f, false);
         yield return new WaitForSeconds(1.3f);
         _feedbackImage.gameObject.SetActive(false);
+    }
+
+    public IEnumerator Death()
+    {
+        yield return new WaitForSeconds(0.8f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private IEnumerator PlayDamageSfx()

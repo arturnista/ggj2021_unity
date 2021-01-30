@@ -5260,3 +5260,4 @@ MonoBehaviour:
   _fireSystem: {fileID: 2362211112926846342}
   _wallHitEffectPrefab: {fileID: 1040608886635896, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
   _enemyHitEffectPrefab: {fileID: 100000, guid: bc98890f6028f444eaa7789bde5e2eeb, type: 3}
+  _attackSfx: {fileID: 8300000, guid: c981c5ba2be460643a98eced04e69a5a, type: 3}
