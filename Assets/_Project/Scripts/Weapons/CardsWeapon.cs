@@ -34,6 +34,8 @@ public class CardsWeapon : BaseWeapon
 
     public override void Disable()
     {
+        _hasPlayedSfx = false;
+        StopAllCoroutines();
         StopAttack();
     }
     

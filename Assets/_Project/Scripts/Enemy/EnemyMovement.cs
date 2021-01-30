@@ -135,5 +135,4 @@ public class EnemyMovement : MonoBehaviour
     {
         _agent.isStopped = false;
     }
-
 }

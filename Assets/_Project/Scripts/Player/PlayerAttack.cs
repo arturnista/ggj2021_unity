@@ -47,18 +47,17 @@ public class PlayerAttack : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && _weapon != _weaponList[2])
         {
-            _auidoSource.PlayOneShot(_changeAkSfx);
             ChangeWeapon(_weaponList[2]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) && _weapon != _weaponList[3])
         {
-            
+            _auidoSource.PlayOneShot(_changeAkSfx);
             ChangeWeapon(_weaponList[3]);
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && _weapon != _previousWeapon && _previousWeapon != null)
         {
-            if (_previousWeapon == _weaponList[2])
+            if (_previousWeapon == _weaponList[3])
             {
                 _auidoSource.PlayOneShot(_changeAkSfx);
             }

@@ -232,8 +232,8 @@ MonoBehaviour:
   _weaponList:
   - {fileID: 6172818953662839284}
   - {fileID: 2375339173537382328}
-  - {fileID: 5025126972942134731}
   - {fileID: 1360194961985838115}
+  - {fileID: 5025126972942134731}
   _changeAkSfx: {fileID: 8300000, guid: e7a0ea1632aea2742bb6c8301a8789bb, type: 3}
 --- !u!82 &3837308408729479349
 AudioSource:
