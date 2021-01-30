@@ -25,28 +25,6 @@ public class UIObjectiveController : MonoBehaviour
         ObjectiveTextUpdate("Find the exit door.");
     }
 
-    // Update is called once per frame
-    // void Update()
-    // {
-    //     if (!_firstObjectiveCompleted)
-    //     {
-    //         ObjectiveTextUpdate("Find the exit door.");
-    //     }
-
-    //     if (_firstObjectiveCompleted && !_secondObjectiveCompleted)
-    //     {
-    //     }
-
-    //     if (_firstObjectiveCompleted && _secondObjectiveCompleted && !_thirdObjectiveCompleted)
-    //     {
-    //     }
-
-    //     if (_firstObjectiveCompleted && _secondObjectiveCompleted && _thirdObjectiveCompleted)
-    //     {
-    //     }
-
-    // }
-
     public void CompleteMainExit()
     {
         if (_firstObjectiveCompleted) return;
@@ -60,7 +38,7 @@ public class UIObjectiveController : MonoBehaviour
         ObjectiveTextUpdate("Find the key in the Security Office.");
         _firstObjectiveCompleted = true;
         _secondObjectiveCompleted = true;
-        StartCoroutine(StartHordeCoroutine(5));
+        StartCoroutine(StartHordeCoroutine(5, 10f));
     }
 
     public void CompleteGetKey()
@@ -68,7 +46,7 @@ public class UIObjectiveController : MonoBehaviour
         if (!_secondObjectiveCompleted || _thirdObjectiveCompleted) return;
         ObjectiveTextUpdate("Exit the Mall by the Emergency Exit.");
         _thirdObjectiveCompleted = true;
-        StartCoroutine(StartHordeCoroutine(10));
+        StartCoroutine(StartHordeCoroutine(10, 25f));
     }
 
     public void CompleteOpenEmergecyExit()
@@ -77,9 +55,9 @@ public class UIObjectiveController : MonoBehaviour
         ObjectiveTextUpdate("Cabo.");
     }
 
-    private IEnumerator StartHordeCoroutine(int amount)
+    private IEnumerator StartHordeCoroutine(int amount, float time)
     {
-        yield return new WaitForSeconds(Random.Range(10f, 25f));
+        yield return new WaitForSeconds(Random.Range(time - 5f, time + 5f));
         _spawnController.CreateHorde(amount);
     }
 

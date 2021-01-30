@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +27,6 @@ namespace OChanzSohJogaGuensinAqueleGachaDeArrombado
         {
             _player = GameObject.FindGameObjectWithTag("Player");
             StartCoroutine(CreateEnemiesCoroutine());
-            // StartCoroutine(CreateHordesCoroutine());
         }
 
         private IEnumerator CreateEnemiesCoroutine()
@@ -44,19 +44,23 @@ namespace OChanzSohJogaGuensinAqueleGachaDeArrombado
             }
         }
 
-        private IEnumerator CreateHordesCoroutine()
-        {
-            yield return new WaitForSeconds(Random.Range(45f, 75f));
-            CreateHorde(10);
-        }
-
         public void CreateHorde(int amount)
         {            
-            CreateEnemies(amount, true);
+            StartCoroutine(CreateHordesCoroutine(amount));
         }
 
-        private void CreateEnemies(int amount, bool force = false)
+        private IEnumerator CreateHordesCoroutine(int amount)
         {
+            GameObject.FindObjectOfType<MusicController>().PlayHorde();
+            var hordeObjects = CreateEnemies(amount, true);
+
+            yield return new WaitUntil(() => hordeObjects.All(x => x == null));
+            GameObject.FindObjectOfType<MusicController>().PlayMusic();
+        }
+
+        private List<EnemyMovement> CreateEnemies(int amount, bool force = false)
+        {
+            List<EnemyMovement> created = new List<EnemyMovement>();
             var availablePoints = GetAvailablePoints();
 
             for (int i = 0; i < amount; i++)
@@ -67,7 +71,11 @@ namespace OChanzSohJogaGuensinAqueleGachaDeArrombado
                 EnemyMovement movement = Instantiate(_enemyPrefab, spawn + new Vector3(randomness.x, 0f, randomness.y), Quaternion.identity).GetComponent<EnemyMovement>();
                 movement.GetComponent<UnityEngine.AI.NavMeshAgent>().speed = Random.Range(5f, 10f);
                 if (force) movement.ForceTarget();
+
+                created.Add(movement);
             }
+
+            return created;
         }
 
         private List<Transform> GetAvailablePoints()
