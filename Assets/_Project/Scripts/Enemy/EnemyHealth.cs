@@ -30,6 +30,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void DealDamage(float damage, int damageForce, Transform damager)
     {
+        if (_currentHealth < 0) return;
         _currentHealth -= damage;
         _enemyMovement.ForceTarget();
         

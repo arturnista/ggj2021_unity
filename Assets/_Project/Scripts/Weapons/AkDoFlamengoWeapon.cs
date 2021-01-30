@@ -55,6 +55,8 @@ public class AkDoFlamengoWeapon : BaseWeapon
 
     public override void Disable()
     {
+        _hasPlayedSfx = false;
+        StopAllCoroutines();
         StopAttack();
     }
     

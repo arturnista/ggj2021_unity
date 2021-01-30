@@ -53,6 +53,8 @@ public class AlligatorWeapon : BaseWeapon
 
     public override void Disable()
     {
+        _hasPlayedSfx = false;
+        StopAllCoroutines();
         StopAttack();
     }
 
@@ -83,7 +85,6 @@ public class AlligatorWeapon : BaseWeapon
             }
 
         }
-
 
     }
 

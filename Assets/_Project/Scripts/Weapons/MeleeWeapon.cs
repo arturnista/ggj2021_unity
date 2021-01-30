@@ -64,6 +64,7 @@ public class MeleeWeapon : BaseWeapon
 
     public override void Disable()
     {
+        _hasPlayedSfx = false;
         _collider.enabled = false;
         StopAllCoroutines();
     }
