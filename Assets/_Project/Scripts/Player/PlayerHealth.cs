@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -32,9 +33,13 @@ public class PlayerHealth : MonoBehaviour
     {
         StartCoroutine(feedback(Color.red));
         _currentHealth -= damage;
-        if (!_hasPlayedDamageSfx)
+        if (!_hasPlayedDamageSfx && _currentHealth > 0)
         {
             StartCoroutine(PlayDamageSfx());
+        }
+        if (_currentHealth <= 0)
+        {
+
         }
         Debug.LogFormat("Health: {0}", _currentHealth);
     }
