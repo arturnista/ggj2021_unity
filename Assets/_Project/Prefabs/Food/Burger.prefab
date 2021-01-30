@@ -5321,6 +5321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 10
+  _pickUpSfxPlayer: {fileID: 5789532088555901953, guid: c5ddfe2770df3a24da78da22d0812fe0, type: 3}
 --- !u!1 &9022519783124019763
 GameObject:
   m_ObjectHideFlags: 0

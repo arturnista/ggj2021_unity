@@ -13,7 +13,6 @@ public class PlayerHealth : MonoBehaviour
     [Header("SFX")]
     [SerializeField] private AudioClip _damageSfx = default;
     [SerializeField] private AudioClip _deathSfx = default;
-    [SerializeField] private AudioClip[] _pickUpSfx = default;
 
     private float _currentHealth = 100f;
     public float CurrentHealth => _currentHealth;
@@ -63,10 +62,4 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         _hasPlayedDamageSfx = false;
     }
-
-    AudioClip GetRandomPickUpSfx()
-    {
-        return _pickUpSfx[Random.Range(0, _pickUpSfx.Length)];
-    }
-
 }

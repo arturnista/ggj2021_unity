@@ -61,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
         _velocity.y += _gravity * Time.deltaTime;
         StaminaDrainCalculation();
+        FootstepsSoundEffects();
 
         _characterController.Move(_velocity * Time.deltaTime);
 
@@ -70,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         RunCheck();
-        FootstepsSoundEffects();
+        
         // Debug.Log(_characterController.velocity.magnitude);
     }
 
@@ -131,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FootstepsSoundEffects()
     {
-        if (_characterController.velocity.magnitude > 0 && _characterController.isGrounded && !_audioSource.isPlaying)
+        if (_characterController.velocity.magnitude > 0 && _isGrounded && !_audioSource.isPlaying)
         {
             float moveFromLastPosition = (lastPosition - _characterController.transform.position).magnitude;
             lastPosition = _characterController.transform.position;
