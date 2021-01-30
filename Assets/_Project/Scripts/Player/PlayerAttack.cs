@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q) && _weapon != _previousWeapon && _previousWeapon != null)
         {
-            if (_previousWeapon = _weaponList[2])
+            if (_previousWeapon == _weaponList[2])
             {
                 _auidoSource.PlayOneShot(_changeAkSfx);
             }

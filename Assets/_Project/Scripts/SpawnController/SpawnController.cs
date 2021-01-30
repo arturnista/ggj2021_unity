@@ -26,7 +26,7 @@ namespace OChanzSohJogaGuensinAqueleGachaDeArrombado
         {
             _player = GameObject.FindGameObjectWithTag("Player");
             StartCoroutine(CreateEnemiesCoroutine());
-            StartCoroutine(CreateHordesCoroutine());
+            // StartCoroutine(CreateHordesCoroutine());
         }
 
         private IEnumerator CreateEnemiesCoroutine()
@@ -47,12 +47,12 @@ namespace OChanzSohJogaGuensinAqueleGachaDeArrombado
         private IEnumerator CreateHordesCoroutine()
         {
             yield return new WaitForSeconds(Random.Range(45f, 75f));
-            CreateHorde();
+            CreateHorde(10);
         }
 
-        public void CreateHorde()
+        public void CreateHorde(int amount)
         {            
-            CreateEnemies(10, true);
+            CreateEnemies(amount, true);
         }
 
         private void CreateEnemies(int amount, bool force = false)

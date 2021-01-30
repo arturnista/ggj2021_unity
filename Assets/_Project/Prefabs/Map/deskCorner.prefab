@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 495476944176527092}
   - component: {fileID: 495476944176527093}
   - component: {fileID: 8630200917049150434}
-  - component: {fileID: 655011310372327824}
+  - component: {fileID: 150236963651328497}
   m_Layer: 3
   m_Name: deskCorner
   m_TagString: Untagged
@@ -131,7 +131,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &655011310372327824
+--- !u!114 &150236963651328497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,9 +140,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 495476944176527094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e236abff3958e143bd6d61735aafb73, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d8b963cee8e5e641b8e60fdd3ff9c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _action: Open drawer
 --- !u!1 &5086409396536298449
 GameObject:
   m_ObjectHideFlags: 0
