@@ -35,41 +35,34 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && _weapon != _weaponList[0])
         {
-            _previousWeapon = _weapon;
-            _weapon.gameObject.SetActive(false);
-            _weapon = _weaponList[0];
-            _weapon.gameObject.SetActive(true);
+            ChangeWeapon(_weaponList[0]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && _weapon != _weaponList[1])
         {
-            _previousWeapon = _weapon;
-            _weapon.gameObject.SetActive(false);
-            _weapon = _weaponList[1];
-            _weapon.gameObject.SetActive(true);
+            ChangeWeapon(_weaponList[1]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && _weapon != _weaponList[2])
         {
-            _previousWeapon = _weapon;
-            _weapon.gameObject.SetActive(false);
-            _weapon = _weaponList[2];
-            _weapon.gameObject.SetActive(true);
+            ChangeWeapon(_weaponList[2]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) && _weapon != _weaponList[3])
         {
-            _previousWeapon = _weapon;
-            _weapon.gameObject.SetActive(false);
-            _weapon = _weaponList[3];
-            _weapon.gameObject.SetActive(true);
+            ChangeWeapon(_weaponList[3]);
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && _weapon != _previousWeapon && _previousWeapon != null)
         {
-            var tempPreviousWeapon = _weapon;
-            _weapon.gameObject.SetActive(false);
-            _weapon = _previousWeapon;
-            _previousWeapon = tempPreviousWeapon;
-            _weapon.gameObject.SetActive(true);
+            ChangeWeapon(_previousWeapon);
         }
+    }
+
+    private void ChangeWeapon(BaseWeapon nextWeapon)
+    {
+        if (_previousWeapon) _previousWeapon.StopAttack();
+        _previousWeapon = _weapon;
+        _weapon.gameObject.SetActive(false);
+        _weapon = nextWeapon;
+        _weapon.gameObject.SetActive(true);
     }
 
 }

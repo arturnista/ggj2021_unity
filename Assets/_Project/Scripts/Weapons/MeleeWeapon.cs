@@ -5,11 +5,17 @@ using UnityEngine;
 public class MeleeWeapon : BaseWeapon
 {
 
+    [Header("Values")]
     [SerializeField] private float _damage = 15f;
     [SerializeField] private int _damageForce = 10;
-    [SerializeField] private float _attackDelay = 1f;
+    [SerializeField] private float _maxAttackTime = 1f;
+    [Header("Detection")]
     [SerializeField] private SphereCollider _collider = default;
+    [Header("Effects")]
     [SerializeField] private GameObject _impactPrefab = default;
+    [SerializeField] private ParticleSystem _chargeEffect = default;
+    [SerializeField] private ParticleSystem _halfChargeEffect = default;
+    [SerializeField] private ParticleSystem _fullChargeEffect = default;
 
     private Transform _parent;
     private Animator _animator;
@@ -17,32 +23,51 @@ public class MeleeWeapon : BaseWeapon
     private bool _isAttacking;
     private float _attackTime;
 
+    private bool _half;
+    private bool _full;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
 
         _parent = transform.parent;
-        _attackTime = _attackDelay;
         _collider.enabled = false;
     }
 
     public override void StartAttack()
     {
+        _animator.SetBool("IsChargingAttack", true);
         _isAttacking = true;
+        _attackTime = 0f;
+        _chargeEffect.Play();
+        _half = false;
+        _full = false;
     }
 
     public override void StopAttack()
     {
+        _animator.SetBool("IsChargingAttack", false);
         _isAttacking = false;
+        _chargeEffect.Stop();
+        _chargeEffect.Clear();
+        Attack();
     }
     
     private void Update()
     {
-        _attackTime += Time.deltaTime;
-        if (_isAttacking && _attackTime > _attackDelay)
+        if (_isAttacking)
         {
-            _attackTime = 0f;
-            Attack();
+            _attackTime += Time.deltaTime;
+            if (!_half && _attackTime >= _maxAttackTime / 2f)
+            {
+                _half = true;
+                _halfChargeEffect.Play();
+            }
+            if (!_full && _attackTime >= _maxAttackTime)
+            {
+                _full = true;
+                _fullChargeEffect.Play();
+            }
         }
     }
 
@@ -54,8 +79,7 @@ public class MeleeWeapon : BaseWeapon
     private IEnumerator AttackCoroutine()
     {
         _collider.enabled = true;
-        _animator.SetTrigger("Attack");
-        yield return new WaitForSeconds(_attackDelay - .1f);
+        yield return new WaitForSeconds(.2f);
         _collider.enabled = false;
     }
 
@@ -70,8 +94,12 @@ public class MeleeWeapon : BaseWeapon
             //     Instantiate(_impactPrefab, hit.point, Quaternion.identity);
             // }
 
+            float lerpValue = Mathf.InverseLerp(0f, _maxAttackTime, _attackTime);
+            float damage = Mathf.Lerp(0f, _damage, lerpValue);
+            int force = Mathf.RoundToInt(Mathf.Lerp(0, _damageForce, lerpValue));
+
             Instantiate(_impactPrefab, transform.position + transform.forward, Quaternion.identity);
-            health.DealDamage(_damage, _damageForce, transform);
+            health.DealDamage(damage, force, transform);
         }
     }
 }

@@ -31,6 +31,7 @@ public class EnemyHealth : MonoBehaviour
         {
             _state.ChangeState(EnemyState.State.Dying);
             _animator.SetTrigger("Death");
+            gameObject.tag = "Untagged";
             Destroy(GetComponent<EnemyAttack>());
             Destroy(GetComponent<SensorToolkit.RangeSensor>());
             Destroy(GetComponent<Collider>());
@@ -50,18 +51,17 @@ public class EnemyHealth : MonoBehaviour
     private IEnumerator TakeDamageCoroutine(int damageForce)
     {
 
-        int force = Mathf.Clamp(damageForce, 0, 10);
+        int force = Mathf.Clamp(damageForce, 0, 11);
 
         _enemyMovement.Pause();
         
-        if (force > 5 && force > Random.Range(0, 14))
+        if (force == 11)
         {
-
-            _state.ChangeState(EnemyState.State.Knockout);
-            _animator.SetTrigger("Knockout");
-            yield return new WaitForSeconds(4f);
-            _state.ChangeState(EnemyState.State.Moving);
-
+            yield return StartCoroutine(KnockoutCoroutine());
+        }
+        else if (force > 5 && force > Random.Range(0, 14))
+        {
+            yield return StartCoroutine(KnockoutCoroutine());
         }
         else
         {
@@ -74,6 +74,14 @@ public class EnemyHealth : MonoBehaviour
         
         _enemyMovement.Resume();
         
+    }
+
+    private IEnumerator KnockoutCoroutine()
+    {
+        _state.ChangeState(EnemyState.State.Knockout);
+        _animator.SetTrigger("Knockout");
+        yield return new WaitForSeconds(4f);
+        _state.ChangeState(EnemyState.State.Moving);
     }
 
 }

@@ -56,7 +56,7 @@ public class EnemyAttack : MonoBehaviour
     
     private void _AttackContact()
     {
-        if (Vector3.Distance(_target.transform.position, transform.position) < _agent.stoppingDistance)
+        if (Vector3.Distance(_target.transform.position, transform.position) < _agent.stoppingDistance * 1.5f)
         {
             PlayerHealth health = _target.GetComponent<PlayerHealth>();
             if (health)

@@ -223,8 +223,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterController: {fileID: 6587604577487486952}
-  _forwardWalkSpeed: 9
-  _forwardRunSpeed: 14
+  _forwardWalkSpeed: 5
+  _forwardRunSpeed: 9
   _backwardMoveSpeed: 4.5
   _gravity: -9.81
   _jumpHeight: 1

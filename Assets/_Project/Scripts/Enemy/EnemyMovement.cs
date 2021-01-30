@@ -19,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
     private RangeSensor _sensor;
 
     private AudioSource _source;
+    private Coroutine _idleCoroutine;
 
     private void Awake()
     {
@@ -31,15 +32,47 @@ public class EnemyMovement : MonoBehaviour
         _source = GetComponent<AudioSource>();
     }
 
+    private void Start()
+    {
+        if (_state.CurrentState == EnemyState.State.Idle)
+        {
+            _idleCoroutine = StartCoroutine(IdleMoveCoroutine());
+        }
+    }
+
+    private IEnumerator IdleMoveCoroutine()
+    {
+        while (true)
+        {
+            
+            Vector2 randomness = Random.insideUnitCircle * 25f;
+            _agent.destination = transform.position + new Vector3(randomness.x, 0f, randomness.y);
+
+            yield return new WaitForSeconds(Random.Range(5f, 10f));
+
+        }
+    }
+
     private void OnEnable()
     {
         _sensor.OnDetected.AddListener(HandlePlayerDetect);
+        _state.OnChangeState += HandleChangeState;
     }
 
     private void OnDisable()
     {
         _sensor.OnDetected.RemoveListener(HandlePlayerDetect);
+        _state.OnChangeState -= HandleChangeState;
         _agent.isStopped = true;
+    }
+
+    private void HandleChangeState(EnemyState.State newState, EnemyState.State lastState)
+    {
+        if (lastState == EnemyState.State.Idle)
+        {
+            if (_idleCoroutine != null) StopCoroutine(_idleCoroutine);
+            _agent.destination = transform.position;
+        }
     }
 
     private void HandlePlayerDetect(GameObject target, Sensor sensor)
@@ -53,11 +86,15 @@ public class EnemyMovement : MonoBehaviour
         if (_state.CurrentState != EnemyState.State.Moving) return;
         
         _agent.destination = _player.transform.position;
-        _animator.SetFloat("Speed", _agent.velocity.magnitude);
         if (Vector3.Distance(_player.transform.position, transform.position) < _agent.stoppingDistance)
         {
             _attack.StartAttacking(_player);
         }
+    }
+
+    private void LateUpdate()
+    {
+        _animator.SetFloat("Speed", _agent.velocity.magnitude);
     }
 
     public void ForceTarget()
@@ -70,13 +107,13 @@ public class EnemyMovement : MonoBehaviour
         if (_player != null) return;
         _player = target;
 
-        if (Random.value > .3f) StartCoroutine(ScreamCoroutine());
+        _source.PlayOneShot(_screamClip);
+        if (Random.value > .15f) StartCoroutine(ScreamCoroutine());
         else _state.ChangeState(EnemyState.State.Moving); 
     }
 
     private IEnumerator ScreamCoroutine()
     {
-        _source.PlayOneShot(_screamClip);
         _animator.SetTrigger("Scream");
         _state.ChangeState(EnemyState.State.Scream);
         yield return new WaitForSeconds(2f);
