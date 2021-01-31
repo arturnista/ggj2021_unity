@@ -291,6 +291,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &680566811 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6587604577487486956, guid: 3c3fd2819b59daa4e9ba1b5e1a7b4739, type: 3}
+  m_PrefabInstance: {fileID: 203337416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1253377426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -298,6 +303,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 100975042225455035, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
+      propertyPath: _playerMouseController
+      value: 
+      objectReference: {fileID: 680566811}
     - target: {fileID: 4200538993712407514, guid: 2a0e384f55f981c4f9267b21301d3516, type: 3}
       propertyPath: m_Name
       value: EventSystem

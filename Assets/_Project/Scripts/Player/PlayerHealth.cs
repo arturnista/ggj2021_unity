@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
     private Animator _animator;
     private bool _hasPlayedDamageSfx = false;
     private AudioSource _audioSource;
+    private bool _dead = false;
 
     private void Awake()
     {
@@ -31,15 +32,19 @@ public class PlayerHealth : MonoBehaviour
 
     public void DealDamage(float damage)
     {
-        StartCoroutine(Feedback(Color.red));
         _currentHealth -= damage;
         if (!_hasPlayedDamageSfx && _currentHealth > 0)
         {
+            StartCoroutine(Feedback(Color.red));
             StartCoroutine(PlayDamageSfx());
         }
         if (_currentHealth <= 0)
         {
-            StartCoroutine(Feedback(Color.black));
+            _currentHealth = 0;
+            if (!_dead)
+            {
+                StartCoroutine(Death(Color.black));
+            }
         }
         Debug.LogFormat("Health: {0}", _currentHealth);
     }
@@ -60,10 +65,16 @@ public class PlayerHealth : MonoBehaviour
         _feedbackImage.gameObject.SetActive(false);
     }
 
-    public IEnumerator Death()
+    public IEnumerator Death(Color color)
     {
-        yield return new WaitForSeconds(0.8f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        _dead = true;
+        color.a = 0.01f;
+        _audioSource.PlayOneShot(_deathSfx);
+        _feedbackImage.color = Color.black;
+        _feedbackImage.gameObject.SetActive(true);
+        _feedbackImage.CrossFadeAlpha(0.9f, 0.4f, false);
+        yield return new WaitForSeconds(0.6f);
+        SceneManager.LoadScene("GameOver");
     }
 
     private IEnumerator PlayDamageSfx()
