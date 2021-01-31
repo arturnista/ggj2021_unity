@@ -12,17 +12,17 @@ public class UIWeaponList : MonoBehaviour
 
     private void Awake()
     {
-        _items = new List<UIWeaponItem>();
-        
-        _playerAttack = GameObject.FindObjectOfType<PlayerAttack>();
+        UpdateList();
+    }
 
-        for (int i = 0; i < _playerAttack.WeaponList.Length; i++)
-        {
-            UIWeaponItem weapon = Instantiate(_itemPrefab, transform).GetComponent<UIWeaponItem>();
-            weapon.Construct(i, _playerAttack.WeaponList[i]);
+    private void OnEnable()
+    {
+        _playerAttack.OnWeaponUpdate += UpdateList;
+    }
 
-            _items.Add(weapon);
-        }
+    private void OnDisable()
+    {
+        _playerAttack.OnWeaponUpdate -= UpdateList;
     }
 
     private void Update()
@@ -38,6 +38,26 @@ public class UIWeaponList : MonoBehaviour
             {
                 item.Deselect();
             }
+        }
+    }
+
+    private void UpdateList()
+    {
+        _items = new List<UIWeaponItem>();
+        _playerAttack = GameObject.FindObjectOfType<PlayerAttack>();
+        
+        int childs = transform.childCount;
+        for (int i = childs - 1; i >= 0; i--) {
+            Destroy( transform.GetChild(i).gameObject );
+        }
+
+        for (int i = 0; i < _playerAttack.WeaponList.Length; i++)
+        {
+            if (!_playerAttack.WeaponList[i].IsAvailable) continue;
+            UIWeaponItem weapon = Instantiate(_itemPrefab, transform).GetComponent<UIWeaponItem>();
+            weapon.Construct(i, _playerAttack.WeaponList[i]);
+
+            _items.Add(weapon);
         }
     }
 

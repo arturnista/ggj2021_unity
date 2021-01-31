@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
 
+    public delegate void WeaponUpdateHandler();
+    public event WeaponUpdateHandler OnWeaponUpdate;
+
     private BaseWeapon _weapon;
     public BaseWeapon Weapon => _weapon;
     private BaseWeapon _previousWeapon;
@@ -37,19 +40,19 @@ public class PlayerAttack : MonoBehaviour
 
     private void ChangeWeapon()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && _weapon != _weaponList[0])
+        if (Input.GetKeyDown(KeyCode.Alpha1) && _weapon != _weaponList[0] && _weaponList[0].IsAvailable)
         {
             ChangeWeapon(_weaponList[0]);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && _weapon != _weaponList[1])
+        if (Input.GetKeyDown(KeyCode.Alpha2) && _weapon != _weaponList[1] && _weaponList[1].IsAvailable)
         {
             ChangeWeapon(_weaponList[1]);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && _weapon != _weaponList[2])
+        if (Input.GetKeyDown(KeyCode.Alpha3) && _weapon != _weaponList[2] && _weaponList[2].IsAvailable)
         {
             ChangeWeapon(_weaponList[2]);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && _weapon != _weaponList[3])
+        if (Input.GetKeyDown(KeyCode.Alpha4) && _weapon != _weaponList[3] && _weaponList[3].IsAvailable)
         {
             _auidoSource.PlayOneShot(_changeAkSfx);
             ChangeWeapon(_weaponList[3]);
@@ -72,6 +75,12 @@ public class PlayerAttack : MonoBehaviour
         _weapon.gameObject.SetActive(false);
         _weapon = nextWeapon;
         _weapon.gameObject.SetActive(true);
+    }
+
+    public void ActiveWeapon(int index)
+    {
+        _weaponList[index].IsAvailable = true;
+        OnWeaponUpdate?.Invoke();
     }
 
 }

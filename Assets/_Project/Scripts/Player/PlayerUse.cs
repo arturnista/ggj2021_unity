@@ -29,7 +29,7 @@ public class PlayerUse : MonoBehaviour
     {
         _usableText.text = "";
         RaycastHit hit;
-        if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, 3f))
+        if (Physics.Raycast(_camera.transform.position + (_camera.transform.forward * .2f), _camera.transform.forward, out hit, 3f))
         {
             BaseUsable usable = hit.transform.GetComponent<BaseUsable>();
             if (usable)
@@ -42,7 +42,7 @@ public class PlayerUse : MonoBehaviour
     private void Use()
     {
         RaycastHit hit;
-        if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, 3f))
+        if (Physics.Raycast(_camera.transform.position + (_camera.transform.forward * .2f), _camera.transform.forward, out hit, 3f))
         {
             BaseUsable usable = hit.transform.GetComponent<BaseUsable>();
             if (usable)
