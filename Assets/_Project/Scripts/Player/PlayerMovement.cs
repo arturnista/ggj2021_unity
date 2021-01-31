@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_canRun)
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && _isGrounded)
             {
                 StartRunning();
             }
@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void StartRunning()
     {
-        if (_currentStamina <= 0) return;
+        if (_currentStamina <= 0 && !_isGrounded) return;
         _isRunning = true;
     }
 

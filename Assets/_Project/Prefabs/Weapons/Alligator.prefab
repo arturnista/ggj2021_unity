@@ -228,13 +228,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b3ee217e31b6b48a4d3af0a4644a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 20
+  _damage: 15
   _attackDelay: 1
   _hitMask:
     serializedVersion: 2
     m_Bits: 8200
   _wallHitEffectPrefab: {fileID: 1040608886635896, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
-  _enemyHitEffectPrefab: {fileID: 100000, guid: bc98890f6028f444eaa7789bde5e2eeb, type: 3}
+  _enemyHitEffectPrefab: {fileID: 100002, guid: e9391f622091e1449bdef4ef15af4948, type: 3}
   _attackSfx: {fileID: 8300000, guid: 535b927cdfa0fef49a3c67f021474771, type: 3}
 --- !u!82 &1479080831074580283
 AudioSource:
