@@ -573,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb659ff92390f14a822047f488c66d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 3
+  mouseSensitivity: 2
   playerBody: {fileID: 6587604577487486959}
 --- !u!45 &3556468293010981377
 Skybox:

@@ -18,8 +18,6 @@ public class MeleeWeapon : BaseWeapon
     [SerializeField] private ParticleSystem _fullChargeEffect = default;
     [Header("SFX")]
     [SerializeField] private AudioClip[] _meleeAttackSfx = default;
-    [SerializeField] private AudioClip _bulkDestroySfx = default;
-
     private Transform _parent;
     private Animator _animator;
 
@@ -31,7 +29,6 @@ public class MeleeWeapon : BaseWeapon
 
     private AudioSource _audioSource;
     private bool _hasPlayedSfx = false;
-    private int _attackCounter;
 
     private void Awake()
     {
@@ -97,20 +94,11 @@ public class MeleeWeapon : BaseWeapon
         _collider.enabled = true;
         if (!_hasPlayedSfx)
         {
-            Debug.Log("entrou");
             _audioSource.PlayOneShot(GetRandomAttackClip(), 0.5f);
             _hasPlayedSfx = true;
         }
-        _attackCounter++;
 
         yield return new WaitForSeconds(.2f);
-
-        if (_attackCounter >= 4)
-        {
-            _audioSource.PlayOneShot(_bulkDestroySfx);
-            _attackCounter = 0;
-        }
-
         _hasPlayedSfx = false;
         _collider.enabled = false;
     }
