@@ -5252,7 +5252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699af38976cb02c4c8c9915d808cf32e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 20
+  _damage: 100
   _attackDelay: 0.1
   _hitMask:
     serializedVersion: 2

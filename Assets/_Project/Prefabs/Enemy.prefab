@@ -1783,11 +1783,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _screamClip: {fileID: 8300000, guid: d66d9afd98f878e42af9d949f5c09947, type: 3}
-  _footstepsSfx:
-  - {fileID: 8300000, guid: d96468d827f87124cbb3eec05b3d16d4, type: 3}
-  - {fileID: 8300000, guid: eb9926ad07c08034cb9ea70e0c155645, type: 3}
-  - {fileID: 8300000, guid: a4a54d90b541c9c4b908345cf457dd92, type: 3}
-  - {fileID: 8300000, guid: 815d742e366f1064d8ebc1700e8f5ff8, type: 3}
 --- !u!114 &7254584537054041750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1815,7 +1810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd8f50749ecca443a1b6c11d9697030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 5
+  _damage: 20
 --- !u!114 &286235631463969480
 MonoBehaviour:
   m_ObjectHideFlags: 0

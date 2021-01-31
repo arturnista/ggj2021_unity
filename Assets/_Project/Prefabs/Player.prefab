@@ -543,6 +543,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6587604576774288762}
     m_Modifications:
+    - target: {fileID: 1062423595169053332, guid: 83a8967531f45ee4088b573bdbf99ad8, type: 3}
+      propertyPath: _damage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1434144196005583793, guid: 83a8967531f45ee4088b573bdbf99ad8, type: 3}
       propertyPath: m_Name
       value: Alligator
@@ -705,6 +709,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6587604576774288762}
     m_Modifications:
+    - target: {fileID: 7473153187901191565, guid: 4345b3a4b97322240baa032abbb2fed5, type: 3}
+      propertyPath: _damage
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7753665810661482328, guid: 4345b3a4b97322240baa032abbb2fed5, type: 3}
       propertyPath: m_Name
       value: BulkHand
@@ -786,6 +794,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6587604576774288762}
     m_Modifications:
+    - target: {fileID: 1330492547761139193, guid: 36690549325a537438142b9b289481b5, type: 3}
+      propertyPath: _damage
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8622549487570138158, guid: 36690549325a537438142b9b289481b5, type: 3}
       propertyPath: m_Name
       value: AkDoFlamengo

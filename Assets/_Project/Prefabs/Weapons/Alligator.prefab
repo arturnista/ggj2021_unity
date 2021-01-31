@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b3ee217e31b6b48a4d3af0a4644a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 15
+  _damage: 20
   _attackDelay: 1
   _hitMask:
     serializedVersion: 2
