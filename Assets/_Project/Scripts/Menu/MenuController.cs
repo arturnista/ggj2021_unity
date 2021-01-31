@@ -24,4 +24,9 @@ public class MenuController : MonoBehaviour
     {
         SceneManager.LoadScene("Tutorial");
     }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
 }
