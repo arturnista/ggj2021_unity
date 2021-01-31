@@ -22,7 +22,7 @@ public class DeskUsable : BaseUsable
 
     public override void Use()
     {
-        if (_isOpen || !_objectiveController.SecondObjectiveCompleted) return;
+        if (_isOpen) return;
         _blockedPassage.SetActive(true);
         _isOpen = true;
         _animator.SetTrigger("Open");

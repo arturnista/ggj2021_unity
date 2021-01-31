@@ -668,6 +668,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1065837077754922421, guid: c30136f839145954f9be6dc33f628590, type: 3}
+      propertyPath: _attackDelay
+      value: 0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 1065837077754922423, guid: c30136f839145954f9be6dc33f628590, type: 3}
       propertyPath: m_Name
       value: DeckCard

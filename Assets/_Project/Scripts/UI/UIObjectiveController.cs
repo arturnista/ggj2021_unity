@@ -44,8 +44,11 @@ public class UIObjectiveController : MonoBehaviour
 
     public void CompleteGetKey()
     {
-        if (!_secondObjectiveCompleted || _thirdObjectiveCompleted) return;
+        if (_thirdObjectiveCompleted) return;
+
         ObjectiveTextUpdate("Exit the Mall by the Emergency Exit.");
+        _firstObjectiveCompleted = true;
+        _secondObjectiveCompleted = true;
         _thirdObjectiveCompleted = true;
         StartCoroutine(StartFinalHordeCoroutine(10, 5f));
     }

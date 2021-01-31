@@ -12,7 +12,21 @@ public class EmergencyExitUsable : BaseUsable
         _objectiveController = GameObject.FindObjectOfType<UIObjectiveController>();
     }
 
-    
+    private void Update()
+    {
+        if (_objectiveController.SecondObjectiveCompleted)
+        {
+            if (!_objectiveController.ThirdObjectiveCompleted)
+            {
+                _action = "Locked";
+            }
+            else
+            {
+                _action = "Exit";
+            }
+        }
+    }
+
     public override void Use()
     {
         if (!_objectiveController.SecondObjectiveCompleted)
