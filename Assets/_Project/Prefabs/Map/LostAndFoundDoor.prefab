@@ -11,7 +11,10 @@ GameObject:
   - component: {fileID: 2524010637153183942}
   - component: {fileID: 1488666006503925603}
   - component: {fileID: 3696393791038378921}
-  m_Layer: 0
+  - component: {fileID: 5081978815240385283}
+  - component: {fileID: 8075764223279859634}
+  - component: {fileID: 2009722301775846286}
+  m_Layer: 3
   m_Name: Door_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,6 +87,48 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5081978815240385283
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903914532208571004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.391874, y: 0.33689305, z: 3.3581262}
+  m_Center: {x: 0.69593865, y: 3.5791377e-14, z: 1.6790631}
+--- !u!208 &8075764223279859634
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903914532208571004}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.69600004, y: 0.16800001, z: 1.6790001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0.69600004, y: 0, z: 1.6790001}
+  m_TimeToStationary: 0.5
+--- !u!114 &2009722301775846286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903914532208571004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fac1fb80730a2438b52fd90f56f542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _action: Open
 --- !u!1001 &4190840515813776777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -93,7 +138,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1219885047623179065, guid: f60813d32bc7a7749a88be7af07494a2, type: 3}
       propertyPath: m_Name
-      value: Door
+      value: LostAndFoundDoor
       objectReference: {fileID: 0}
     - target: {fileID: 1992339603605127555, guid: f60813d32bc7a7749a88be7af07494a2, type: 3}
       propertyPath: m_RootOrder
