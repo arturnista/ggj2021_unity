@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 using OChanzSohJogaGuensinAqueleGachaDeArrombado;
 
 public class UIObjectiveController : MonoBehaviour
@@ -46,19 +47,25 @@ public class UIObjectiveController : MonoBehaviour
         if (!_secondObjectiveCompleted || _thirdObjectiveCompleted) return;
         ObjectiveTextUpdate("Exit the Mall by the Emergency Exit.");
         _thirdObjectiveCompleted = true;
-        StartCoroutine(StartHordeCoroutine(10, 25f));
+        StartCoroutine(StartFinalHordeCoroutine(10, 5f));
     }
 
     public void CompleteOpenEmergecyExit()
     {
         if (!_thirdObjectiveCompleted) return;
-        ObjectiveTextUpdate("Cabo.");
+        SceneManager.LoadScene("Win");
     }
 
     private IEnumerator StartHordeCoroutine(int amount, float time)
     {
         yield return new WaitForSeconds(Random.Range(time - 5f, time + 5f));
         _spawnController.CreateHorde(amount);
+    }
+
+    private IEnumerator StartFinalHordeCoroutine(int amount, float time)
+    {
+        yield return new WaitForSeconds(Random.Range(time - 5f, time + 5f));
+        _spawnController.CreateFinalHorde(amount);
     }
 
     void ObjectiveTextUpdate(string text)

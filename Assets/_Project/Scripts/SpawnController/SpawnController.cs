@@ -58,6 +58,23 @@ namespace OChanzSohJogaGuensinAqueleGachaDeArrombado
             GameObject.FindObjectOfType<MusicController>().PlayMusic();
         }
 
+        public void CreateFinalHorde(int amount)
+        {            
+            StartCoroutine(CreateFinalHordesCoroutine(amount));
+        }
+
+        private IEnumerator CreateFinalHordesCoroutine(int amount)
+        {
+            GameObject.FindObjectOfType<MusicController>().PlayHorde();
+            var hordeObjects = CreateEnemies(amount, true);
+            while (true)
+            {
+                yield return new WaitUntil(() => hordeObjects.Count(x => x != null) < 8);
+                var moreHorde = CreateEnemies(5, true);
+                hordeObjects.AddRange(moreHorde);
+            }
+        }
+
         private List<EnemyMovement> CreateEnemies(int amount, bool force = false)
         {
             List<EnemyMovement> created = new List<EnemyMovement>();
