@@ -459,7 +459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 479380058247949399, guid: 96d3d1cfd8dc5a644b6b12bd2c0ae386, type: 3}
       propertyPath: m_text
-      value: CONGRATULATIONS
+      value: YOU ESCAPED
       objectReference: {fileID: 0}
     - target: {fileID: 479380058247949399, guid: 96d3d1cfd8dc5a644b6b12bd2c0ae386, type: 3}
       propertyPath: m_fontSize
