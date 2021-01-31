@@ -18,6 +18,7 @@ public class AkDoFlamengoWeapon : BaseWeapon
     private Transform _head;
 
     private AudioSource _audioSource;
+    private Animator _animator;
 
     private bool _isAttacking;
     private float _attackTime;
@@ -31,6 +32,7 @@ public class AkDoFlamengoWeapon : BaseWeapon
         _attackTime = _attackDelay;
         _audioSource = GetComponent<AudioSource>();
         _musicTime = 0f;
+        _animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -74,6 +76,7 @@ public class AkDoFlamengoWeapon : BaseWeapon
     {
         _fireSystem.Play();
         StartCoroutine(AkAttackSfx());
+        _animator.SetTrigger("Fire");
         RaycastHit hit;
         Debug.DrawRay(_head.position, _head.forward * 100f, Color.red, 10f);
         if (Physics.Raycast(_head.position, _head.forward, out hit, Mathf.Infinity, _hitMask))

@@ -16,11 +16,13 @@ public class AlligatorWeapon : BaseWeapon
     private bool _isAttacking;
     private float _attackTime;
     private bool _hasPlayedSfx = false;
+    private Animator _animator;
 
     private void Awake() 
     {
         _head = GetComponentInParent<Camera>().transform;
         _audioSource = GetComponent<AudioSource>();  
+        _animator = GetComponent<Animator>();
     }
 
     private void Update() 
@@ -60,6 +62,7 @@ public class AlligatorWeapon : BaseWeapon
 
     private void Attack()
     {
+        _animator.SetTrigger("Fire");
         Vector3 direction = _head.forward;
         Vector3 spread = Vector3.zero;
 

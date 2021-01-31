@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 3478814886365377011}
   - component: {fileID: 1062423595169053332}
   - component: {fileID: 1479080831074580283}
+  - component: {fileID: 160643496015964153}
   m_Layer: 6
   m_Name: Alligator
   m_TagString: Untagged
@@ -228,6 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b3ee217e31b6b48a4d3af0a4644a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isAvailable: 1
   _damage: 15
   _attackDelay: 1
   _hitMask:
@@ -332,6 +334,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &160643496015964153
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434144196005583793}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f6912855b658884db85ea273456e12d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1716863770650032735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,7 +1139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6326620357695884233}
   m_LocalRotation: {x: 0.00000022329218, y: 0.9650086, z: -0.26221818, w: -0.0000011645654}
-  m_LocalPosition: {x: 8.492086e-17, y: 0.0030484528, z: 1.4901161e-10}
+  m_LocalPosition: {x: 0, y: -0.00677, z: 0.00859}
   m_LocalScale: {x: 1, y: 0.99999994, z: 1}
   m_Children:
   - {fileID: 1491468616890914214}

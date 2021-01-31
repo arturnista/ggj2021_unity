@@ -9868,9 +9868,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ed3319415e40c48918370c299695b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isAvailable: 1
   _damage: 30
   _damageForce: 11
-  _maxAttackTime: 2
+  _maxAttackTime: 1
   _collider: {fileID: 1715250900543163821}
   _impactPrefab: {fileID: 100004, guid: f95ff734540a0d749be6571b6cb5b37f, type: 3}
   _chargeEffect: {fileID: 639640710821390557}
