@@ -214,6 +214,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7176573562811483269}
+  - {fileID: 78587566105799147}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -238,6 +239,8 @@ MonoBehaviour:
   _wallHitEffectPrefab: {fileID: 1040608886635896, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
   _enemyHitEffectPrefab: {fileID: 100002, guid: e9391f622091e1449bdef4ef15af4948, type: 3}
   _attackSfx: {fileID: 8300000, guid: 535b927cdfa0fef49a3c67f021474771, type: 3}
+  _firePoint: {fileID: 78587566105799147}
+  _projectilePrefab: {fileID: 8268252247243962720, guid: ec4604da62871c04faae71571b152f4f, type: 3}
 --- !u!82 &1479080831074580283
 AudioSource:
   m_ObjectHideFlags: 0
@@ -959,6 +962,36 @@ Transform:
   - {fileID: 783887087355433011}
   - {fileID: 1342292339911865300}
   m_Father: {fileID: 3948254188528646006}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4224698648663674355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 78587566105799147}
+  m_Layer: 6
+  m_Name: Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &78587566105799147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4224698648663674355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.399, y: 0.262, z: -0.441}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3478814886365377011}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4418040609771766721

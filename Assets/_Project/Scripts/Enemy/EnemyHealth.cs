@@ -40,7 +40,9 @@ public class EnemyHealth : MonoBehaviour
             _audioSource.PlayOneShot(_deathSfx, 0.5f);
             _animator.SetTrigger("Death");
             gameObject.tag = "Untagged";
+            GetComponentInChildren<SkinnedMeshRenderer>().material.DisableKeyword("_EMISSION");
             Destroy(GetComponent<EnemyAttack>());
+            Destroy(GetComponent<UnityEngine.AI.NavMeshAgent>());
             Destroy(GetComponent<SensorToolkit.RangeSensor>());
             Destroy(GetComponent<Collider>());
             Destroy(_enemyMovement);

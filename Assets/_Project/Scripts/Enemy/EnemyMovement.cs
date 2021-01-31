@@ -92,7 +92,7 @@ public class EnemyMovement : MonoBehaviour
         if (_state.CurrentState != EnemyState.State.Moving) return;
         
         _agent.destination = _player.transform.position;
-        if (Vector3.Distance(_player.transform.position, transform.position) < _agent.stoppingDistance)
+        if (Vector3.Distance(_player.transform.position, transform.position) < (_agent.stoppingDistance - 0.5f))
         {
             _attack.StartAttacking(_player);
         }

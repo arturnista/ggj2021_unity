@@ -8,9 +8,14 @@ public class AlligatorWeapon : BaseWeapon
     [SerializeField] private float _damage = 6f;
     [SerializeField] private float _attackDelay = 0.5f;
     [SerializeField] private LayerMask _hitMask = default;
+    [Header("Effects")]
     [SerializeField] private GameObject _wallHitEffectPrefab = default;
     [SerializeField] private GameObject _enemyHitEffectPrefab = default;
+    [Header("Sounds")]
     [SerializeField] private AudioClip _attackSfx = default;
+    [Header("Projectile")]
+    [SerializeField] private Transform _firePoint = default;
+    [SerializeField] private GameObject _projectilePrefab = default;
     private AudioSource _audioSource;
     private Transform _head;
     private bool _isAttacking;
@@ -86,9 +91,21 @@ public class AlligatorWeapon : BaseWeapon
             {
                 Instantiate(_wallHitEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal, Vector3.up));
             }
-
+            StartCoroutine(TrailCoroutine(hit));
         }
 
+    }
+
+    private IEnumerator TrailCoroutine(RaycastHit hit)
+    {
+        GameObject created = Instantiate(_projectilePrefab, _firePoint.position, Quaternion.identity);
+        float time = 0f;
+        while (time < .1f)
+        {
+            time += Time.deltaTime;
+            created.transform.position = Vector3.Lerp(_firePoint.position, hit.point, time / .1f);
+            yield return null;
+        }
     }
 
     public IEnumerator AkAttackSfx()
